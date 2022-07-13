@@ -100,7 +100,7 @@ function App() {
                   Author
                 </th>
                 <th>
-                  Action
+                  Actions
                 </th>
               </tr>
             </thead>
