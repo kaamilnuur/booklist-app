@@ -10,7 +10,7 @@
 //     return []
 //   }
 //  }
-
+ 
 function App() {
   //  main array of an object state 
   const loadedTodos = localStorage.getItem("books")
@@ -44,10 +44,15 @@ function App() {
 
     // delete book from LS
     const deleteBook=(isbn)=>{
-      const filteredBooks=books.filter((element,index)=>{
-        return element.isbn !== isbn
-      })
-      setbooks(filteredBooks);
+      if(window.confirm('Are You Sure To Delete booked list ?')){
+        const filteredBooks=books.filter((element,index)=>{
+          return element.isbn !== isbn
+        })
+        setbooks(filteredBooks);
+      }else{
+        return false
+      }
+    
     }
   
   
@@ -56,7 +61,14 @@ function App() {
      localStorage.setItem("books", JSON.stringify(books))
       },[books])
 
-     
+       ///  delete all booked lists
+       function deleteAll(){
+        if(window.confirm('Are You Sure To Delete All Booked Lists ?')){
+          setbooks([])
+        }else{
+          return false
+        }
+       }
   return (
     <div className="wrapper">
       <h1>Booklist App</h1>
@@ -111,7 +123,7 @@ function App() {
            
           </div>
           <button className='btn btn-danger btn-md'
-            onClick={()=>setbooks([])}>Remove All</button>
+            onClick={()=>deleteAll()}>Remove All</button>
         </>}
         {books.length <1  && <div className="nodata">Not data found </div>}
       </div>
